@@ -257,11 +257,23 @@
     
     [self viewWillDisappearWithCompletion:^{
         [_camera takePhotoWithCaptureView:_captureView videoOrientation:videoOrientation cropSize:_captureView.frame.size
-                               completion:^(UIImage *photo) {
-                                   TGPhotoViewController *viewController = [TGPhotoViewController newWithDelegate:_delegate photo:photo];
-                                   [self.navigationController pushViewController:viewController animated:YES];
-                               }];
+        completion:^(UIImage *photo) {
+            if ([_delegate respondsToSelector:@selector(cameraShouldShowPreviewScreen)]) {
+                if ([_delegate cameraShouldShowPreviewScreen]) {
+                    [self navigateToPhotoViewController:photo];
+                } else {
+                    [_delegate cameraDidTakePhoto:photo];
+                }
+            } else {
+                [self navigateToPhotoViewController:photo];
+            }
+        }];
     }];
+}
+
+- (void)navigateToPhotoViewController:(UIImage *)photo {
+    TGPhotoViewController *viewController = [TGPhotoViewController newWithDelegate:_delegate photo:photo];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (IBAction)albumTapped {

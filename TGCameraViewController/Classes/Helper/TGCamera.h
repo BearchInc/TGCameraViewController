@@ -88,5 +88,6 @@
 - (void)cameraDidSavePhotoAtPath:(NSURL *)assetURL;
 - (void)cameraWillTakePhoto;
 - (BOOL)cameraShouldShowGalleryPicker;
+- (BOOL)cameraShouldShowPreviewScreen;
 
 @end
