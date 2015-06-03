@@ -35,8 +35,6 @@ static NSString* const kTGCacheSatureKey = @"TGCacheSatureKey";
 static NSString* const kTGCacheCurveKey = @"TGCacheCurveKey";
 static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 
-
-
 @interface TGPhotoViewController ()
 
 @property (strong, nonatomic) IBOutlet UIImageView *photoView;
@@ -68,8 +66,6 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 + (instancetype)newController;
 
 @end
-
-
 
 @implementation TGPhotoViewController
 
