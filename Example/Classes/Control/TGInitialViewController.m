@@ -77,6 +77,10 @@
     return NO;
 }
 
+- (BOOL)cameraShouldShowPreviewScreen {
+    return NO;
+}
+
 - (void)cameraWillTakePhoto {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
