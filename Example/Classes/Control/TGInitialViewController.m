@@ -60,12 +60,12 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)cameraDidTakePhoto:(UIImage *)image {
+- (void)cameraDidTakePhoto:(UIImage *)image withDisappearingTime:(int)timeToDisappear{
     _photoView.image = image;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)cameraDidSelectAlbumPhoto:(UIImage *)image {
+- (void)cameraDidSelectAlbumPhoto:(UIImage *)image withDisappearingTime:(int)timeToDisappear {
     _photoView.image = image;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -78,7 +78,7 @@
 }
 
 - (BOOL)cameraShouldShowPreviewScreen {
-    return NO;
+    return YES;
 }
 
 - (void)cameraWillTakePhoto {
