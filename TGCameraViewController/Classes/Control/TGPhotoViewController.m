@@ -76,8 +76,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 
 @implementation TGPhotoViewController
 
-+ (instancetype)newWithDelegate:(id<TGCameraDelegate>)delegate photo:(UIImage *)photo
-{
++ (instancetype)newWithDelegate:(id<TGCameraDelegate>)delegate photo:(UIImage *)photo {
     TGPhotoViewController *viewController = [TGPhotoViewController newController];
     
     if (viewController) {
@@ -89,8 +88,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     return viewController;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     if (CGRectGetHeight([[UIScreen mainScreen] bounds]) <= 480) {
@@ -135,18 +133,15 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     self.options = [optionsArray copy];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (BOOL)prefersStatusBarHidden
-{
+- (BOOL)prefersStatusBarHidden {
     return YES;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     _photoView = nil;
     _bottomView = nil;
     _filterView = nil;
@@ -159,13 +154,11 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 #pragma mark -
 #pragma mark - Controller actions
 
-- (IBAction)backTapped
-{
+- (IBAction)backTapped {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)confirmTapped
-{
+- (IBAction)confirmTapped {
     if ( [_delegate respondsToSelector:@selector(cameraWillTakePhoto)]) {
         [_delegate cameraWillTakePhoto];
     }
@@ -208,8 +201,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     }
 }
 
-- (IBAction)filtersTapped
-{
+- (IBAction)filtersTapped {
     if ([_filterView isDescendantOfView:self.view]) {
         [_filterView removeFromSuperviewAnimated];
     } else {
@@ -222,14 +214,12 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
 #pragma mark -
 #pragma mark - Filter view actions
 
-- (IBAction)defaultFilterTapped:(UIButton *)button
-{
+- (IBAction)defaultFilterTapped:(UIButton *)button {
     [self addDetailViewToButton:button];
     _photoView.image = _photo;
 }
 
-- (IBAction)satureFilterTapped:(UIButton *)button
-{
+- (IBAction)satureFilterTapped:(UIButton *)button {
     [self addDetailViewToButton:button];
     
     if ([_cachePhoto objectForKey:kTGCacheSatureKey]) {
@@ -238,11 +228,9 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
         [_cachePhoto setObject:[_photo saturateImage:1.8 withContrast:1] forKey:kTGCacheSatureKey];
         _photoView.image = [_cachePhoto objectForKey:kTGCacheSatureKey];
     }
-    
 }
 
-- (IBAction)curveFilterTapped:(UIButton *)button
-{
+- (IBAction)curveFilterTapped:(UIButton *)button {
     [self addDetailViewToButton:button];
     
     if ([_cachePhoto objectForKey:kTGCacheCurveKey]) {
@@ -253,8 +241,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     }
 }
 
-- (IBAction)vignetteFilterTapped:(UIButton *)button
-{
+- (IBAction)vignetteFilterTapped:(UIButton *)button {
     [self addDetailViewToButton:button];
     
     if ([_cachePhoto objectForKey:kTGCacheVignetteKey]) {
@@ -265,12 +252,10 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     }
 }
 
-
 #pragma mark -
 #pragma mark - Private methods
 
-- (void)addDetailViewToButton:(UIButton *)button
-{
+- (void)addDetailViewToButton:(UIButton *)button {
     [_detailFilterView removeFromSuperview];
     
     CGFloat height = 2.5;
@@ -287,8 +272,7 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     [button addSubview:_detailFilterView];
 }
 
-+ (instancetype)newController
-{
++ (instancetype)newController {
     return [super new];
 }
 
@@ -311,10 +295,10 @@ static NSString* const kTGCacheVignetteKey = @"TGCacheVignetteKey";
     return [self getTitleForRow:row];
 }
 
-
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.seconds = ((NSNumber *)self.options[row]).intValue;
     [self.timeButton setTitle:[self getTitleForRow:row] forState:UIControlStateNormal];
+    self.pickerView.hidden = YES;
 }
 
 - (NSString *)getTitleForRow:(int)row {
